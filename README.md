@@ -2,6 +2,8 @@
 
 A comprehensive tool for designing climbing walls and fitting them into existing structures with structural analysis and 3D visualization.
 
+**Available as both a Web Application and CLI Tool**
+
 ## Features
 
 - **Interactive Design Wizard**: Create custom climbing wall designs with guided prompts
@@ -18,14 +20,46 @@ A comprehensive tool for designing climbing walls and fitting them into existing
 # Install dependencies
 npm install
 
-# Build the project
+# Build the CLI
 npm run build
 
-# Run in development mode
-npm run dev
+# Build the web application
+npm run build:web
 ```
 
-## Usage
+## Web Application
+
+The easiest way to use the tool is through the interactive web interface.
+
+### Running the Web App
+
+```bash
+# Development mode with hot reload
+npm run dev:web
+
+# Build for production
+npm run build:web
+
+# Preview production build
+npm run preview
+```
+
+The web interface provides:
+- 🎨 **Interactive Forms**: Design walls with real-time input validation
+- 📊 **Live Analysis**: Instant structural analysis and safety checks
+- 🖼️ **3D Visualization**: Rendered as static images you can download
+- 💾 **Export Options**: Download designs as JSON or 3D scene data
+- 📱 **Responsive Design**: Works on desktop, tablet, and mobile
+
+### Web Interface Guide
+
+1. **Design Tab**: Enter wall dimensions, angle, and difficulty
+2. **Structure Tab**: Define your building's dimensions and material
+3. **Generate**: Click "Generate Design" or "Find Best Fit"
+4. **Review Results**: See load analysis, anchor recommendations, and safety validation
+5. **Export**: Download your design or 3D visualization
+
+## CLI Usage
 
 ### Interactive Design Wizard
 
