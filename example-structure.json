@@ -1,0 +1,98 @@
+{
+  "id": "structure-1769453425080",
+  "name": "Building Structure",
+  "dimensions": {
+    "width": 10,
+    "height": 5,
+    "depth": 8
+  },
+  "walls": [
+    {
+      "id": "wall-north",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "normal": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "dimensions": {
+        "width": 10,
+        "height": 5
+      },
+      "material": "concrete",
+      "existingAttachments": []
+    },
+    {
+      "id": "wall-south",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 8
+      },
+      "normal": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "dimensions": {
+        "width": 10,
+        "height": 5
+      },
+      "material": "concrete",
+      "existingAttachments": []
+    },
+    {
+      "id": "wall-east",
+      "position": {
+        "x": 10,
+        "y": 0,
+        "z": 0
+      },
+      "normal": {
+        "x": -1,
+        "y": 0,
+        "z": 0
+      },
+      "dimensions": {
+        "width": 8,
+        "height": 5
+      },
+      "material": "concrete",
+      "existingAttachments": []
+    },
+    {
+      "id": "wall-west",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "normal": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "dimensions": {
+        "width": 8,
+        "height": 5
+      },
+      "material": "concrete",
+      "existingAttachments": []
+    }
+  ],
+  "material": {
+    "type": "concrete",
+    "thickness": 0.2,
+    "density": 2400,
+    "compressiveStrength": 25
+  },
+  "loadCapacity": {
+    "maxPointLoad": 25000,
+    "maxDistributedLoad": 2500,
+    "safetyFactor": 3
+  }
+}
