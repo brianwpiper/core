@@ -1,0 +1,22 @@
+<!-- Supabase Auth email template: Magic Link.
+     Paste into Dashboard > Authentication > Email Templates > Magic Link,
+     or reference it from supabase/config.toml for local development. -->
+<div style="font-family: Arial, Helvetica, sans-serif; max-width: 520px; margin: 0 auto; color: #1b2430;">
+  <h1 style="font-size: 22px; color: #14365d;">Your Summit Workbook login</h1>
+  <p style="font-size: 16px; line-height: 1.5;">Use either option below. Both work for the next hour.</p>
+
+  <p style="font-size: 16px; line-height: 1.5;"><strong>Option 1: tap the button</strong> on the device where you want to use the workbook.</p>
+  <p>
+    <a href="{{ .ConfirmationURL }}"
+       style="display: inline-block; background: #14365d; color: #ffffff; padding: 14px 24px; border-radius: 8px; text-decoration: none; font-size: 16px; font-weight: bold;">
+      Open my workbook
+    </a>
+  </p>
+
+  <p style="font-size: 16px; line-height: 1.5;"><strong>Option 2: type this code</strong> on any device, for example your laptop while this email is open on your phone.</p>
+  <p style="font-size: 32px; letter-spacing: 8px; font-weight: bold; color: #14365d; font-family: 'Courier New', monospace;">{{ .Token }}</p>
+
+  <p style="font-size: 14px; color: #556070; line-height: 1.5;">
+    Did not ask for this? You can ignore this email. Need help? Find a facilitator at the Summit or reply to this message.
+  </p>
+</div>
