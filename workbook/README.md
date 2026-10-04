@@ -47,30 +47,41 @@ without a deploy. An edited item is stored in the database and wins over the bui
 
 ## Going live with Supabase
 
-1. **Create a project** (paid plan for October and November; confirm connection, auth, and email limits cover 1,200 concurrent users).
-2. **Apply the schema:** `supabase link --project-ref <ref>` then `supabase db push`
-   (or paste `supabase/migrations/20261001000000_init.sql` into the SQL editor).
-3. **Deploy the admin function:** `supabase functions deploy admin-users`
-4. **Auth settings** (Dashboard > Authentication):
+The live project is **MainStreetEvent** (`owmcdbvvqadskvtbourl`, https://owmcdbvvqadskvtbourl.supabase.co).
+
+Done (October 4):
+- [x] Pro plan
+- [x] Database tables, row-level security, account hooks, dashboard function (`supabase/migrations/`, versions 01 to 06)
+- [x] `admin-users` edge function deployed
+- [x] Security rules tested: attendees see only their own rows, cannot change their email, cannot open the dashboard; admins see all
+
+Still to do:
+1. **"Delete my entries" function.** Open the Supabase SQL Editor, paste
+   `supabase/migrations/20261004060000_workbook_07_delete_my_data.sql`, and click Run.
+   (The setup tool asks for a human to confirm anything containing a delete command, so this one is run by hand.)
+2. **Auth settings** (Dashboard > Authentication):
    - Turn **off** "Allow new users to sign up". Accounts come only from the Eventbrite import.
    - Email OTP length: **6**. OTP expiry: 3600 seconds.
-   - Site URL: your workbook domain (for example `https://workbook.mainstreetevent.com`). Add it to Redirect URLs.
+   - Site URL: your workbook domain (for example `https://workbook.mainstreetevent.com`). Add it, and the Vercel URL, to Redirect URLs.
    - Email template "Magic Link": paste `supabase/templates/magic_link.html`. It contains both the link and the 6-digit code.
    - **Custom SMTP** (Resend or Postmark). The built-in sender cannot handle 1,200 login emails. Raise the auth email rate limit after SMTP is set up.
-5. **Make yourself admin.** Log in once (after importing yourself), then in the SQL editor:
+   - Database connections for Auth: switch to a percentage-based allocation (Supabase's advisor flags the fixed 10).
+3. **Make yourself and Quinn admins.** Dashboard > Authentication > Users > Add user > Create new user
+   (your email, tick auto-confirm). Then in the SQL Editor:
    ```sql
    insert into user_roles (user_id, role)
    select user_id, r from profiles, unnest(array['admin','facilitator']) r
    where email in ('brian@...', 'quinn@...');
    ```
-   After that, give facilitators their role from **Admin > Attendees**.
-6. **Front end env vars** (Vercel project settings, or `.env.local`):
+   After that, give facilitators their role from **Admin > Attendees** in the workbook.
+4. **Front end env vars** (Vercel > Project > Settings > Environment Variables), then redeploy:
    ```
-   VITE_SUPABASE_URL=https://<ref>.supabase.co
-   VITE_SUPABASE_ANON_KEY=<anon public key>
+   VITE_SUPABASE_URL=https://owmcdbvvqadskvtbourl.supabase.co
+   VITE_SUPABASE_ANON_KEY=<publishable key from Supabase > Project Settings > API Keys>
    ```
-7. **Deploy to Vercel:** import the repo, set Root Directory to `workbook`. `vercel.json` handles routing and caching.
-   (`netlify.toml` is included if you prefer Netlify.)
+5. **Domain:** Vercel > Settings > Domains, add `workbook.mainstreetevent.com`.
+
+Applying the schema to a fresh project (for example a load-test copy): `supabase link --project-ref <ref>` then `supabase db push`.
 
 ## Running the event
 
