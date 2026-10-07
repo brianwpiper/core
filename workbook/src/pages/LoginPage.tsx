@@ -77,7 +77,7 @@ export function LoginPage() {
           {step === 'email' && (
             <form onSubmit={send} noValidate>
               <h1>Log in</h1>
-              <p>Enter the email you used to register. We will send you a login link and a 6-digit code.</p>
+              <p>Enter the email you used to register. We will send you a login link and a short code.</p>
               <TextInput label="Email" type="email" value={email} onChange={setEmail} max={200} />
               {demo && (
                 <div className="field">
@@ -104,24 +104,24 @@ export function LoginPage() {
             <form onSubmit={verify} noValidate>
               <h1>Check your email</h1>
               <p>
-                We sent an email to <strong>{email}</strong>. Tap the button in the email on this device, or type the 6-digit code
+                We sent an email to <strong>{email}</strong>. Tap the button in the email on this device, or type the code
                 here. The code works on any device, so you can read the email on your phone and type the code on your laptop.
               </p>
               {demo && <p className="notice info">Demo mode: no email is sent. The code is {DEMO_CODE}.</p>}
               <div className="field">
-                <label htmlFor="otp">6-digit code</label>
+                <label htmlFor="otp">Code from the email</label>
                 <input
                   id="otp"
                   inputMode="numeric"
                   autoComplete="one-time-code"
                   pattern="[0-9]*"
-                  maxLength={6}
+                  maxLength={10}
                   value={code}
                   onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
                   style={{ fontSize: '1.6rem', letterSpacing: '0.4em', textAlign: 'center' }}
                 />
               </div>
-              <button className="btn big" type="submit" disabled={busy || code.length !== 6}>
+              <button className="btn big" type="submit" disabled={busy || code.length < 6}>
                 {busy ? 'Checking' : 'Log in'}
               </button>
               <div className="row" style={{ marginTop: 14 }}>
